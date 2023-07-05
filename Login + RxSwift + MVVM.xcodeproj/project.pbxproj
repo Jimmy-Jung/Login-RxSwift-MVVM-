@@ -9,21 +9,29 @@
 /* Begin PBXBuildFile section */
 		55B619462A5421AB0072A727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619452A5421AB0072A727 /* AppDelegate.swift */; };
 		55B619482A5421AB0072A727 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619472A5421AB0072A727 /* SceneDelegate.swift */; };
-		55B6194A2A5421AB0072A727 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619492A5421AB0072A727 /* ViewController.swift */; };
+		55B6194A2A5421AB0072A727 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619492A5421AB0072A727 /* LoginViewController.swift */; };
 		55B6194D2A5421AB0072A727 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B6194B2A5421AB0072A727 /* Main.storyboard */; };
 		55B6194F2A5421AD0072A727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B6194E2A5421AD0072A727 /* Assets.xcassets */; };
 		55B619522A5421AD0072A727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B619502A5421AD0072A727 /* LaunchScreen.storyboard */; };
+		55B6195A2A5421F60072A727 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619592A5421F60072A727 /* LoginView.swift */; };
+		55B619602A5422EF0072A727 /* LoginPageDefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */; };
+		55B619632A5423920072A727 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55B619622A5423920072A727 /* SnapKit */; };
+		55B619662A5423B00072A727 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 55B619652A5423B00072A727 /* Then */; };
+		55B619682A5425060072A727 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619672A5425060072A727 /* Color + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		55B619422A5421AB0072A727 /* Login + RxSwift + MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Login + RxSwift + MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B619452A5421AB0072A727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55B619472A5421AB0072A727 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		55B619492A5421AB0072A727 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55B619492A5421AB0072A727 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		55B6194C2A5421AB0072A727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		55B6194E2A5421AD0072A727 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55B619512A5421AD0072A727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55B619532A5421AD0072A727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55B619592A5421F60072A727 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageDefaultValues.swift; sourceTree = "<group>"; };
+		55B619672A5425060072A727 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B619632A5423920072A727 /* SnapKit in Frameworks */,
+				55B619662A5423B00072A727 /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +66,50 @@
 		55B619442A5421AB0072A727 /* Login + RxSwift + MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				55B619452A5421AB0072A727 /* AppDelegate.swift */,
-				55B619472A5421AB0072A727 /* SceneDelegate.swift */,
-				55B619492A5421AB0072A727 /* ViewController.swift */,
-				55B6194B2A5421AB0072A727 /* Main.storyboard */,
-				55B6194E2A5421AD0072A727 /* Assets.xcassets */,
-				55B619502A5421AD0072A727 /* LaunchScreen.storyboard */,
 				55B619532A5421AD0072A727 /* Info.plist */,
+				55B6195E2A5422D70072A727 /* Utils */,
+				55B6195D2A5422730072A727 /* View */,
+				55B6195B2A54223A0072A727 /* App */,
 			);
 			path = "Login + RxSwift + MVVM";
+			sourceTree = "<group>";
+		};
+		55B6195B2A54223A0072A727 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				55B6195C2A54224E0072A727 /* Asset */,
+				55B619452A5421AB0072A727 /* AppDelegate.swift */,
+				55B619472A5421AB0072A727 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		55B6195C2A54224E0072A727 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				55B6194E2A5421AD0072A727 /* Assets.xcassets */,
+				55B6194B2A5421AB0072A727 /* Main.storyboard */,
+				55B619502A5421AD0072A727 /* LaunchScreen.storyboard */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
+		55B6195D2A5422730072A727 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55B619492A5421AB0072A727 /* LoginViewController.swift */,
+				55B619592A5421F60072A727 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55B6195E2A5422D70072A727 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */,
+				55B619672A5425060072A727 /* Color + Extension.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +128,10 @@
 			dependencies = (
 			);
 			name = "Login + RxSwift + MVVM";
+			packageProductDependencies = (
+				55B619622A5423920072A727 /* SnapKit */,
+				55B619652A5423B00072A727 /* Then */,
+			);
 			productName = "Login + RxSwift + MVVM";
 			productReference = 55B619422A5421AB0072A727 /* Login + RxSwift + MVVM.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +160,10 @@
 				Base,
 			);
 			mainGroup = 55B619392A5421AB0072A727;
+			packageReferences = (
+				55B619612A5423920072A727 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				55B619642A5423B00072A727 /* XCRemoteSwiftPackageReference "Then" */,
+			);
 			productRefGroup = 55B619432A5421AB0072A727 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,9 +191,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55B6194A2A5421AB0072A727 /* ViewController.swift in Sources */,
+				55B6194A2A5421AB0072A727 /* LoginViewController.swift in Sources */,
 				55B619462A5421AB0072A727 /* AppDelegate.swift in Sources */,
+				55B619602A5422EF0072A727 /* LoginPageDefaultValues.swift in Sources */,
+				55B6195A2A5421F60072A727 /* LoginView.swift in Sources */,
 				55B619482A5421AB0072A727 /* SceneDelegate.swift in Sources */,
+				55B619682A5425060072A727 /* Color + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +414,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		55B619612A5423920072A727 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		55B619642A5423B00072A727 /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		55B619622A5423920072A727 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B619612A5423920072A727 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		55B619652A5423B00072A727 /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B619642A5423B00072A727 /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 55B6193A2A5421AB0072A727 /* Project object */;
 }
