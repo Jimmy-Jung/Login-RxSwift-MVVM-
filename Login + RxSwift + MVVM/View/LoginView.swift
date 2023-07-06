@@ -88,13 +88,13 @@ final class LoginView: UIView {
     }
     
     lazy var joinButton = UIButton().then {
-        $0.backgroundColor = .kakaoLightBrown
+        $0.backgroundColor = .kakaoBrown
         $0.layer.cornerRadius = 5
         $0.setTitle(DV.LabelText.joinButton, for: .normal)
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         $0.setTitleColor(.white, for: .normal)
         $0.setTitleColor(.kakaoTextBrown, for: .disabled)
-        $0.isEnabled = false
+        $0.isEnabled = true
     }
     
     lazy var stackView = UIStackView().then {
@@ -116,14 +116,14 @@ final class LoginView: UIView {
     }
     
     lazy var defaultEmailLabel = UILabel().then {
-        $0.text = "Email: \(DV.LabelText.defaultEmail)"
+        $0.text = "Email: \(DV.Account.defaultEmail)"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         $0.textColor = .kakaoLightBrown
         $0.textAlignment = .center
     }
     
     lazy var defaultPasswordLabel = UILabel().then {
-        $0.text = "Password: \(DV.LabelText.defaultPassword)"
+        $0.text = "Password: \(DV.Account.defaultPassword)"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         $0.textColor = .kakaoLightBrown
         $0.textAlignment = .center

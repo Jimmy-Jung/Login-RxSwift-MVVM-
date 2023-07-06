@@ -12,7 +12,7 @@ import RxCocoa
 
 class LoginViewController: UIViewController {
     
-    private let loginView = LoginView()
+    private var loginView = LoginView()
     private let viewModel = LoginViewModel()
     private let disposeBag = DisposeBag()
     private lazy var textFields = [loginView.emailTextField, loginView.passwordTextField]
@@ -25,6 +25,8 @@ class LoginViewController: UIViewController {
 
             setupAddTarget()
             setupBindings()
+        loginView.emailTextField.text = DV.Account.defaultEmail
+        loginView.passwordTextField.text = DV.Account.defaultPassword
         }
 
         private func setupAddTarget() {
@@ -79,26 +81,34 @@ class LoginViewController: UIViewController {
                 .disposed(by: disposeBag)
 
             viewModel.everythingValid
-                .bind(to: loginView.loginButton.rx.isEnabled)
+                .subscribe(onNext: { [weak self] in
+                    self?.loginView.loginButton.isEnabled = $0
+                    self?.loginView.loginButton.backgroundColor = $0 ? .kakaoBrown : .kakaoLightBrown
+                })
                 .disposed(by: disposeBag)
-
-            viewModel.everythingValid
-                .bind(to: loginView.loginButton.rx.isEnabled)
-                .disposed(by: disposeBag)
-
+            
             loginView.loginButton.rx.tap
-                .bind(to: viewModel.loginTapped)
+                .subscribe(onNext: { [weak self] in
+                    // 회원가입 버튼 클릭 시 동작하는 코드 구현
+                    print("로그인 버튼 눌림")
+                    self?.viewModel.loginTapped.accept($0)
+                })
+//                .bind(to: viewModel.loginTapped)
                 .disposed(by: disposeBag)
 
             viewModel.loginSuccess
                 .subscribe(onNext: { [weak self] in
-                    self?.dismiss(animated: true, completion: nil)
+                    IsLogin.launchedBefore = true
+                    self?.dismiss(animated: true)
+                    
                 })
                 .disposed(by: disposeBag)
 
             loginView.joinButton.rx.tap
                 .subscribe(onNext: { [weak self] in
                     // 회원가입 버튼 클릭 시 동작하는 코드 구현
+                    print("회원가입 버튼 눌림")
+                    
                 })
                 .disposed(by: disposeBag)
 
@@ -111,11 +121,19 @@ class LoginViewController: UIViewController {
 
         private func setupBindings() {
             viewModel.emailErrorMessage
-                .bind(to: loginView.emailInfoLabel.rx.text)
+                .subscribe(onNext: { [weak self] in
+                    self?.loginView.emailInfoLabel.text = $0
+                    self?.loginView.emailInfoLabel.textColor = .systemRed
+                    self?.loginView.emailInfoLabel.shake()
+                })
                 .disposed(by: disposeBag)
 
             viewModel.passwordErrorMessage
-                .bind(to: loginView.passwordInfoLabel.rx.text)
+                .subscribe(onNext: { [weak self] in
+                    self?.loginView.passwordInfoLabel.text = $0
+                    self?.loginView.passwordInfoLabel.textColor = .systemRed
+                    self?.loginView.passwordInfoLabel.shake()
+                })
                 .disposed(by: disposeBag)
 
         }

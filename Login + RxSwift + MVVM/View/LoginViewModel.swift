@@ -24,36 +24,38 @@ final class LoginViewModel {
     private let disposeBag = DisposeBag()
     
     init() {
-        setupEmail()
-        setupPassword()
-        setupEverythingValid()
+        setup()
         setupLoginTapped()
     }
     
-    private func setupEmail() {
+    private func setup() {
         email
             .map { $0.isValidEmail() }
             .bind(to: emailValid)
             .disposed(by: disposeBag)
-    }
-    
-    private func setupPassword() {
+        
         password
             .map { $0.isValidPassword() }
             .bind(to: passwordValid)
             .disposed(by: disposeBag)
-    }
-    
-    private func setupEverythingValid() {
+        
         Observable.combineLatest(emailValid, passwordValid) { $0 && $1 }
             .bind(to: everythingValid)
             .disposed(by: disposeBag)
+        
     }
+
     
     private func setupLoginTapped() {
         loginTapped
             .subscribe(onNext: { [weak self] in
-                self?.login()
+                guard let self = self else {return}
+                self.login()
+                print("로그인 버튼 탭드")
+                if self.accountCheck {
+                    print("어카운트 체크드")
+                    loginSuccess.accept(())
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -69,13 +71,20 @@ final class LoginViewModel {
             return
         }
         
-        if !emailValid.value {
+        if !accountCheck {
             emailErrorMessage.accept("등록되지 않은 이메일 입니다.")
             return
         }
-        if !passwordValid.value {
+        if !accountCheck {
             passwordErrorMessage.accept("비밀번호가 올바르지 않습니다.")
             return
         }
+        
+    }
+    
+    private var accountCheck: Bool {
+        return email.value == DV.Account.defaultEmail
+        && password.value == DV.Account.defaultPassword
+        ? true : false
     }
 }
