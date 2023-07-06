@@ -11,6 +11,8 @@ import Then
 
 final class LoginView: UIView {
     private let textViewHeight: CGFloat = DV.TextSize.loginTextViewHeight
+    var emailInfoLabelCenterYConstraint: Constraint? = nil
+    var passwordInfoLabelCenterYConstraint: Constraint? = nil
     
     // MARK: - UI요소
     
@@ -113,6 +115,20 @@ final class LoginView: UIView {
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     }
     
+    lazy var defaultEmailLabel = UILabel().then {
+        $0.text = "Email: \(DV.LabelText.defaultEmail)"
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        $0.textColor = .kakaoLightBrown
+        $0.textAlignment = .center
+    }
+    
+    lazy var defaultPasswordLabel = UILabel().then {
+        $0.text = "Password: \(DV.LabelText.defaultPassword)"
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        $0.textColor = .kakaoLightBrown
+        $0.textAlignment = .center
+    }
+    
     // MARK: - 이니셜라이저
     
     override init(frame: CGRect) {
@@ -129,7 +145,7 @@ final class LoginView: UIView {
     
     private func setup() {
         self.backgroundColor = .kakaoYellow
-        [logoImageView, stackView, passwordResetButton].forEach { self.addSubview($0) }
+        [logoImageView, stackView, passwordResetButton, defaultEmailLabel, defaultPasswordLabel].forEach { self.addSubview($0) }
     }
     
     // MARK: - 오토레이아웃 설정
@@ -144,7 +160,7 @@ final class LoginView: UIView {
         emailInfoLabel.snp.makeConstraints {
             $0.leading.equalTo(emailTextFieldView).offset(8)
             $0.trailing.equalTo(emailTextFieldView).offset(-8)
-            $0.centerY.equalTo(emailTextFieldView)
+            self.emailInfoLabelCenterYConstraint =  $0.centerY.equalTo(emailTextFieldView).offset(-3).constraint
         }
         
         emailTextField.snp.makeConstraints {
@@ -157,7 +173,7 @@ final class LoginView: UIView {
         passwordInfoLabel.snp.makeConstraints {
             $0.leading.equalTo(passwordTextFieldView).offset(8)
             $0.trailing.equalTo(passwordTextFieldView).offset(-8)
-            $0.centerY.equalTo(passwordTextFieldView)
+            self.passwordInfoLabelCenterYConstraint = $0.centerY.equalTo(passwordTextFieldView).offset(-3).constraint
         }
         
         passwordTextField.snp.makeConstraints {
@@ -183,6 +199,20 @@ final class LoginView: UIView {
         
         passwordResetButton.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(30)
+            $0.trailing.equalToSuperview().offset(-30)
+            $0.height.equalTo(textViewHeight)
+        }
+        
+        defaultEmailLabel.snp.makeConstraints {
+            $0.top.equalTo(passwordResetButton.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(30)
+            $0.trailing.equalToSuperview().offset(-30)
+            $0.height.equalTo(textViewHeight)
+        }
+        
+        defaultPasswordLabel.snp.makeConstraints {
+            $0.top.equalTo(defaultEmailLabel.snp.bottom)
             $0.leading.equalToSuperview().offset(30)
             $0.trailing.equalToSuperview().offset(-30)
             $0.height.equalTo(textViewHeight)

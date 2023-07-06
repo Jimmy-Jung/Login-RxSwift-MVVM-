@@ -22,6 +22,9 @@ struct DV {
         static let loginButton = "로그인"
         static let joinButton = "회원가입"
         static let passwordResetButton = "비밀번호 재설정"
+        
+        static let defaultEmail = "jimmy@google.com"
+        static let defaultPassword = "k123456"
     }
 }
 
