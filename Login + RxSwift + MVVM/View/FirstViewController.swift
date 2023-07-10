@@ -6,18 +6,30 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class FirstViewController: UIViewController {
     
+    @IBOutlet weak var welcomeLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // ⭐️ 로그인화면 띄우기
         if !IsLogin.launchedBefore {
             let vc = LoginViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc, animated: false, completion: nil)
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: false)
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let email = Auth.auth().currentUser?.email ?? "고객"
+        welcomeLabel.text = """
+        환영합니다.
+        \(email)님
+        """
     }
 
     override func viewDidLoad() {
@@ -27,9 +39,11 @@ class FirstViewController: UIViewController {
     
     @IBAction func logOut(_ sender: Any) {
         IsLogin.launchedBefore = false
+        self.welcomeLabel.text = "로그아웃"
         let vc = LoginViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
         
     }
     

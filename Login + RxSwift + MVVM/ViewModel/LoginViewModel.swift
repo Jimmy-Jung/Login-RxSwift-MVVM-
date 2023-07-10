@@ -5,9 +5,10 @@
 //  Created by 정준영 on 2023/07/05.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
+import FirebaseAuth
 
 final class LoginViewModel {
     
@@ -22,6 +23,7 @@ final class LoginViewModel {
     let passwordErrorMessage = PublishRelay<String>()
     
     private let disposeBag = DisposeBag()
+    
     
     init() {
         setup()
@@ -44,47 +46,44 @@ final class LoginViewModel {
             .disposed(by: disposeBag)
         
     }
-
+    
     
     private func setupLoginTapped() {
         loginTapped
             .subscribe(onNext: { [weak self] in
                 guard let self = self else {return}
-                self.login()
-                print("로그인 버튼 탭드")
-                if self.accountCheck {
-                    print("어카운트 체크드")
-                    loginSuccess.accept(())
-                }
+                self.signIn()
             })
             .disposed(by: disposeBag)
+        
+        
+    }
+  
+    
+    private func signIn() {
+        
+        Auth.auth().signIn(withEmail: email.value, password: password.value) { [weak self] authResult, error in
+            if let error = error as? NSError {
+                let tx = DV.LoginErrorText.self
+            switch error.code {
+            case AuthErrorCode.networkError.rawValue:
+                self?.emailErrorMessage.accept(tx.internetError)
+            case AuthErrorCode.userNotFound.rawValue:
+                self?.emailErrorMessage.accept(tx.emailError)
+            case AuthErrorCode.wrongPassword.rawValue:
+                self?.passwordErrorMessage.accept(tx.passwordError)
+            default:
+                self?.emailErrorMessage.accept(tx.loginError)
+                }
+                
+            } else {
+                self?.loginSuccess.accept(())
+            }
+            
+        }
+        
     }
     
-    private func login() {
-        if email.value.isEmpty {
-            emailErrorMessage.accept("이메일을 입력해주세요.")
-            return
-        }
-        
-        if password.value.isEmpty {
-            passwordErrorMessage.accept("비밀번호를 입력해주세요.")
-            return
-        }
-        
-        if !accountCheck {
-            emailErrorMessage.accept("등록되지 않은 이메일 입니다.")
-            return
-        }
-        if !accountCheck {
-            passwordErrorMessage.accept("비밀번호가 올바르지 않습니다.")
-            return
-        }
-        
-    }
     
-    private var accountCheck: Bool {
-        return email.value == DV.Account.defaultEmail
-        && password.value == DV.Account.defaultPassword
-        ? true : false
-    }
+    
 }

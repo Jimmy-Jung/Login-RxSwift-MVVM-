@@ -1,15 +1,15 @@
 //
-//  LoginView.swift
+//  JoinView.swift
 //  Login + RxSwift + MVVM
 //
-//  Created by 정준영 on 2023/07/04.
+//  Created by 정준영 on 2023/07/10.
 //
 
 import UIKit
 import SnapKit
 import Then
 
-final class LoginView: UIView {
+final class JoinView: UIView {
     private let textViewHeight: CGFloat = DV.TextSize.loginTextViewHeight
     private lazy var stackViewCount = CGFloat(stackView.arrangedSubviews.count)
     private let space = DV.TextSize.stackViewSpace
@@ -79,15 +79,6 @@ final class LoginView: UIView {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
     }
     
-    lazy var loginButton = UIButton().then {
-        $0.backgroundColor = .kakaoLightBrown
-        $0.layer.cornerRadius = 5
-        $0.setTitle(DV.LabelText.loginButton, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.setTitleColor(.white, for: .normal)
-        $0.setTitleColor(.kakaoTextBrown, for: .disabled)
-        $0.isEnabled = false
-    }
     
     lazy var joinButton = UIButton().then {
         $0.backgroundColor = .kakaoBrown
@@ -106,16 +97,9 @@ final class LoginView: UIView {
         $0.alignment = .fill
         $0.addArrangedSubview(emailTextFieldView)
         $0.addArrangedSubview(passwordTextFieldView)
-        $0.addArrangedSubview(loginButton)
         $0.addArrangedSubview(joinButton)
     }
-    
-    lazy var passwordResetButton = UIButton().then {
-        $0.backgroundColor = .clear
-        $0.setTitle(DV.LabelText.passwordResetButton, for: .normal)
-        $0.setTitleColor(.kakaoBrown, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-    }
+
     
     lazy var defaultEmailLabel = UILabel().then {
         $0.text = "Email: \(DV.Account.defaultEmail)"
@@ -147,7 +131,7 @@ final class LoginView: UIView {
     
     private func setup() {
         self.backgroundColor = .kakaoYellow
-        [logoImageView, stackView, passwordResetButton, defaultEmailLabel, defaultPasswordLabel].forEach { self.addSubview($0) }
+        [logoImageView, stackView, defaultEmailLabel, defaultPasswordLabel].forEach { self.addSubview($0) }
     }
     
     // MARK: - 오토레이아웃 설정
@@ -198,16 +182,10 @@ final class LoginView: UIView {
             $0.trailing.equalToSuperview().offset(-30)
             $0.height.equalTo(textViewHeight * stackViewCount + space * (stackViewCount - 1))
         }
-        
-        passwordResetButton.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(30)
-            $0.trailing.equalToSuperview().offset(-30)
-            $0.height.equalTo(textViewHeight)
-        }
+  
         
         defaultEmailLabel.snp.makeConstraints {
-            $0.top.equalTo(passwordResetButton.snp.bottom).offset(10)
+            $0.top.equalTo(stackView.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(30)
             $0.trailing.equalToSuperview().offset(-30)
             $0.height.equalTo(textViewHeight)
@@ -221,3 +199,5 @@ final class LoginView: UIView {
         }
     }
 }
+
+

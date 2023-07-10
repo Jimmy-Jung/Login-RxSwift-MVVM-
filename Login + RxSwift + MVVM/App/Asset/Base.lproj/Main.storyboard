@@ -16,29 +16,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHw-Y2-vZw">
-                                <rect key="frame" x="138" y="409" width="117" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31F-h9-CDR">
+                                <rect key="frame" x="136" y="480" width="121" height="47.666666666666629"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="다음 넘어가가"/>
-                                <connections>
-                                    <segue destination="xD6-5e-BZg" kind="show" id="3ER-tE-Miv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31F-h9-CDR">
-                                <rect key="frame" x="155" y="488" width="83" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="로그아웃"/>
+                                <buttonConfiguration key="configuration" style="plain" title="로그아웃">
+                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                </buttonConfiguration>
                                 <connections>
                                     <action selector="logOut:" destination="aab-sd-gYw" eventType="touchUpInside" id="D5Y-jx-xHO"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환영합니다  지미님" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZj-Qk-7Sg">
+                                <rect key="frame" x="20" y="392.33333333333331" width="353" height="67.666666666666686"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NWR-Zb-CsN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NWR-Zb-CsN" firstAttribute="trailing" secondItem="wZj-Qk-7Sg" secondAttribute="trailing" constant="20" id="90n-vt-vNs"/>
+                            <constraint firstItem="31F-h9-CDR" firstAttribute="top" secondItem="wZj-Qk-7Sg" secondAttribute="bottom" constant="20" id="JOa-NY-Qud"/>
+                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="centerX" secondItem="7pq-1i-Fo9" secondAttribute="centerX" id="YjW-Ux-yxE"/>
+                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="leading" secondItem="NWR-Zb-CsN" secondAttribute="leading" constant="20" id="gOc-sP-duK"/>
+                            <constraint firstItem="31F-h9-CDR" firstAttribute="centerX" secondItem="7pq-1i-Fo9" secondAttribute="centerX" id="pmX-mO-XMz"/>
+                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="centerY" secondItem="7pq-1i-Fo9" secondAttribute="centerY" id="tZz-iQ-JYr"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="EP7-tt-fha"/>
+                    <connections>
+                        <outlet property="welcomeLabel" destination="wZj-Qk-7Sg" id="BaF-Dk-lWb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sml-nL-UH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -49,7 +58,7 @@
             <objects>
                 <viewController id="xD6-5e-BZg" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sIy-Ry-BT8">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="7vG-n0-AZA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -66,6 +75,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="sSs-AO-0e1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IR7-ip-bTo">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

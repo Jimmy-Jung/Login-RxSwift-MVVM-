@@ -6,14 +6,13 @@
 //
 
 import UIKit
-import SnapKit
 import RxSwift
 import RxCocoa
 
 class LoginViewController: UIViewController {
     
     private var loginView = LoginView()
-    private let viewModel = LoginViewModel()
+    private lazy var viewModel = LoginViewModel()
     private let disposeBag = DisposeBag()
     private lazy var textFields = [loginView.emailTextField, loginView.passwordTextField]
     
@@ -21,124 +20,125 @@ class LoginViewController: UIViewController {
         view = loginView
     }
     override func viewDidLoad() {
-            super.viewDidLoad()
-
-            setupAddTarget()
-            setupBindings()
+        super.viewDidLoad()
+        //        navigationController?.navigationBar.isHidden = true
+        setupAddTarget()
+        setupBindings()
+        autoLogin()
+    }
+    private func autoLogin() {
         loginView.emailTextField.text = DV.Account.defaultEmail
         loginView.passwordTextField.text = DV.Account.defaultPassword
-        }
-
-        private func setupAddTarget() {
-            
-            let tapGesture = UITapGestureRecognizer()
-                view.addGestureRecognizer(tapGesture)
-
-                tapGesture.rx.event
-                    .subscribe(onNext: { [weak self] _ in
-                        self?.view.endEditing(true)
-                    })
-                    .disposed(by: disposeBag)
-            
-            textFields.forEach { textField in
-                textField.rx.controlEvent([.editingDidBegin,.editingChanged])
-                    .subscribe(onNext: { [weak self] in
-                        self?.textFieldDidBeginEditing(textField)
-                    })
-                    .disposed(by: disposeBag)
-            }
-            
-            textFields.forEach { textField in
-                textField.rx.controlEvent(.editingDidEnd)
-                    .subscribe(onNext: { [weak self] in
-                        self?.textFieldDidEndEditing(textField)
-                    })
-                    .disposed(by: disposeBag)
-            }
-            
-            loginView.emailTextField.rx.text.orEmpty
-                .bind(to: viewModel.email)
-                .disposed(by: disposeBag)
-
-            loginView.passwordTextField.rx.text.orEmpty
-                .bind(to: viewModel.password)
-                .disposed(by: disposeBag)
-
-            loginView.passwordSecureButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    self?.loginView.passwordTextField.isSecureTextEntry.toggle()
-                })
-                .disposed(by: disposeBag)
-
-            viewModel.emailValid
-                .map { $0 ? UIColor.systemGreen : UIColor.kakaoLightBrown}
-                .bind(to: loginView.emailInfoLabel.rx.textColor)
-                .disposed(by: disposeBag)
-
-            viewModel.passwordValid
-                .map { $0 ? UIColor.systemGreen : UIColor.kakaoLightBrown}
-                .bind(to: loginView.passwordInfoLabel.rx.textColor)
-                .disposed(by: disposeBag)
-
-            viewModel.everythingValid
-                .subscribe(onNext: { [weak self] in
-                    self?.loginView.loginButton.isEnabled = $0
-                    self?.loginView.loginButton.backgroundColor = $0 ? .kakaoBrown : .kakaoLightBrown
-                })
-                .disposed(by: disposeBag)
-            
-            loginView.loginButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    // 회원가입 버튼 클릭 시 동작하는 코드 구현
-                    print("로그인 버튼 눌림")
-                    self?.viewModel.loginTapped.accept($0)
-                })
-//                .bind(to: viewModel.loginTapped)
-                .disposed(by: disposeBag)
-
-            viewModel.loginSuccess
-                .subscribe(onNext: { [weak self] in
-                    IsLogin.launchedBefore = true
-                    self?.dismiss(animated: true)
-                    
-                })
-                .disposed(by: disposeBag)
-
-            loginView.joinButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    // 회원가입 버튼 클릭 시 동작하는 코드 구현
-                    print("회원가입 버튼 눌림")
-                    
-                })
-                .disposed(by: disposeBag)
-
-            loginView.passwordResetButton.rx.tap
-                .subscribe(onNext: { [weak self] in
-                    // 비밀번호 재설정 버튼 클릭 시 동작하는 코드 구현
-                })
-                .disposed(by: disposeBag)
-        }
-
-        private func setupBindings() {
-            viewModel.emailErrorMessage
-                .subscribe(onNext: { [weak self] in
-                    self?.loginView.emailInfoLabel.text = $0
-                    self?.loginView.emailInfoLabel.textColor = .systemRed
-                    self?.loginView.emailInfoLabel.shake()
-                })
-                .disposed(by: disposeBag)
-
-            viewModel.passwordErrorMessage
-                .subscribe(onNext: { [weak self] in
-                    self?.loginView.passwordInfoLabel.text = $0
-                    self?.loginView.passwordInfoLabel.textColor = .systemRed
-                    self?.loginView.passwordInfoLabel.shake()
-                })
-                .disposed(by: disposeBag)
-
-        }
+        loginView.emailTextField.becomeFirstResponder()
+    }
     
-
+    private func setupAddTarget() {
+        
+        let tapGesture = UITapGestureRecognizer()
+        view.addGestureRecognizer(tapGesture)
+        
+        tapGesture.rx.event
+            .subscribe(onNext: { [weak self] _ in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
+        
+        textFields.forEach { textField in
+            textField.rx.controlEvent([.editingDidBegin,.editingChanged])
+                .subscribe(onNext: { [weak self] in
+                    self?.textFieldDidBeginEditing(textField)
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        textFields.forEach { textField in
+            textField.rx.controlEvent(.editingDidEnd)
+                .subscribe(onNext: { [weak self] in
+                    self?.textFieldDidEndEditing(textField)
+                })
+                .disposed(by: disposeBag)
+        }
+        
+        loginView.emailTextField.rx.text.orEmpty
+            .bind(to: viewModel.email)
+            .disposed(by: disposeBag)
+        
+        loginView.passwordTextField.rx.text.orEmpty
+            .bind(to: viewModel.password)
+            .disposed(by: disposeBag)
+        
+        loginView.passwordSecureButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.loginView.passwordTextField.isSecureTextEntry.toggle()
+            })
+            .disposed(by: disposeBag)
+        
+        loginView.loginButton.rx.tap
+            .bind(to: viewModel.loginTapped)
+            .disposed(by: disposeBag)
+        
+        loginView.joinButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.moveToJoinView()
+            })
+            .disposed(by: disposeBag)
+        
+        loginView.passwordResetButton.rx.tap
+            .subscribe(onNext: {
+                // 비밀번호 재설정 버튼 클릭 시 동작하는 코드 구현
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func setupBindings() {
+        viewModel.emailValid
+            .map { $0 ? UIColor.systemGreen : UIColor.kakaoLightBrown}
+            .bind(to: loginView.emailInfoLabel.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.passwordValid
+            .map { $0 ? UIColor.systemGreen : UIColor.kakaoLightBrown}
+            .bind(to: loginView.passwordInfoLabel.rx.textColor)
+            .disposed(by: disposeBag)
+        
+        viewModel.everythingValid
+            .subscribe(onNext: { [weak self] in
+                self?.loginView.loginButton.isEnabled = $0
+                self?.loginView.loginButton.backgroundColor = $0 ? .kakaoBrown : .kakaoLightBrown
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.loginSuccess
+            .subscribe(onNext: { [weak self] in
+                IsLogin.launchedBefore = true
+                self?.dismiss(animated: true)
+                
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.emailErrorMessage
+            .subscribe(onNext: { [weak self] in
+                self?.loginView.emailInfoLabel.text = $0
+                self?.loginView.emailInfoLabel.textColor = .systemRed
+                self?.loginView.emailInfoLabel.shake()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.passwordErrorMessage
+            .subscribe(onNext: { [weak self] in
+                self?.loginView.passwordInfoLabel.text = $0
+                self?.loginView.passwordInfoLabel.textColor = .systemRed
+                self?.loginView.passwordInfoLabel.shake()
+            })
+            .disposed(by: disposeBag)
+        
+    }
+    
+    private func moveToJoinView() {
+        let vc = JoinViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
 }
 
@@ -172,6 +172,7 @@ extension LoginViewController {
     func textFieldDidEndEditing(_ textField: UITextField) {
         
         if textField == loginView.emailTextField {
+            loginView.emailInfoLabel.text = DV.LabelText.emailInfoLabel
             loginView.emailTextFieldView.backgroundColor = .systemBackground
             // 빈칸이면 원래로 되돌리기
             if loginView.emailTextField.text == "" {
@@ -180,6 +181,7 @@ extension LoginViewController {
             }
         }
         if textField == loginView.passwordTextField {
+            loginView.passwordInfoLabel.text = DV.LabelText.passwordInfoLabel
             loginView.passwordTextFieldView.backgroundColor = .systemBackground
             // 빈칸이면 원래로 되돌리기
             if loginView.passwordTextField.text == "" {
