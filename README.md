@@ -14,7 +14,7 @@ SnapKit + Then 기능 학습
 2. UI객체는 Then으로 구현해준다
 3. AutoLayout은 SnapKit으로 구현해준다.
 
-<img width="350" alt="image" src="https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/403d2c7b-df2d-4848-a4f4-3079ea7930d5">
+<img width="350" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/f2674b84-3ba9-437f-86d8-67b73656dad7">
 
 - Text와 Size를 구조체에 별도로 생성하고 관리해준다.
 ```swift
@@ -55,8 +55,9 @@ emailInfoLabel.snp.makeConstraints {
 2. email과 password 양식 검사를 통해 PlaceHolderLabel에 표시해준다.
 3. email과 password가 맞으면 다음 화면으로 넘어간다.
 4. 로그인 여부는 userDefault에 저장해서 확인한다.
-   
-<img width="350" alt="image" src="https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917">
+
+<img width="350" alt="image" src="[https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917](https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/e449e721-20b7-48bf-8342-0c0809de9f6f)">
+<img width="350" alt="image" src="[https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917](https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/172f4b74-f1c7-4146-8d70-0d79aa0ce95f)">
 
 ## 로직
 
