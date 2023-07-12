@@ -20,3 +20,11 @@ extension UIView {
         self.layer.add(shake, forKey: "position")
     }
 }
+
+extension UILabel {
+    func shake(with text: String) {
+        self.text = text
+        self.textColor = .systemRed
+        self.shake()
+    }
+}

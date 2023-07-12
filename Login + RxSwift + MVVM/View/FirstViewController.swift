@@ -8,14 +8,15 @@
 import UIKit
 import FirebaseAuth
 
-class FirstViewController: UIViewController {
+final class FirstViewController: UIViewController {
     
     @IBOutlet weak var welcomeLabel: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // ⭐️ 로그인화면 띄우기
-        if !IsLogin.launchedBefore {
+        
+        if Auth.auth().currentUser == nil {
             let vc = LoginViewController()
             let nav = UINavigationController(rootViewController: vc)
             nav.modalPresentationStyle = .fullScreen
@@ -24,11 +25,13 @@ class FirstViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        let name = Auth.auth().currentUser?.displayName
+        let dispalyName = name ?? "닉네임 없음"
         let email = Auth.auth().currentUser?.email ?? "고객"
         welcomeLabel.text = """
         환영합니다.
         \(email)님
+        \(dispalyName)
         """
     }
 
@@ -37,13 +40,23 @@ class FirstViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func reset(_ sender: Any) {
+        let email = Auth.auth().currentUser?.email ?? ""
+        Auth.auth().sendPasswordReset(withEmail: email)
+    }
     @IBAction func logOut(_ sender: Any) {
-        IsLogin.launchedBefore = false
-        self.welcomeLabel.text = "로그아웃"
-        let vc = LoginViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        do {
+            try Auth.auth().signOut()
+            self.welcomeLabel.text = "로그아웃"
+            let vc = LoginViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav, animated: true)
+        } catch {
+            let error = error as NSError
+            defaultAlert(title: DV.LogoutErrorText.title, message: error.localizedDescription)
+        }
+        
         
     }
     

@@ -16,32 +16,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31F-h9-CDR">
-                                <rect key="frame" x="136" y="480" width="121" height="47.666666666666629"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="로그아웃">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="logOut:" destination="aab-sd-gYw" eventType="touchUpInside" id="D5Y-jx-xHO"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환영합니다  지미님" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZj-Qk-7Sg">
-                                <rect key="frame" x="20" y="392.33333333333331" width="353" height="67.666666666666686"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Bk5-MF-DAT">
+                                <rect key="frame" x="20" y="328.33333333333331" width="353" height="195.66666666666669"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="환영합니다  지미님" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZj-Qk-7Sg">
+                                        <rect key="frame" x="113" y="0.0" width="127.33333333333331" height="67.666666666666671"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jeC-vj-S14">
+                                        <rect key="frame" x="95.333333333333329" y="87.666666666666686" width="162.33333333333337" height="40.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="비밀번호 재설정">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="reset:" destination="aab-sd-gYw" eventType="touchUpInside" id="WuE-hS-ohQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31F-h9-CDR">
+                                        <rect key="frame" x="116" y="148" width="121" height="47.666666666666657"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="로그아웃">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="logOut:" destination="aab-sd-gYw" eventType="touchUpInside" id="D5Y-jx-xHO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NWR-Zb-CsN"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NWR-Zb-CsN" firstAttribute="trailing" secondItem="wZj-Qk-7Sg" secondAttribute="trailing" constant="20" id="90n-vt-vNs"/>
-                            <constraint firstItem="31F-h9-CDR" firstAttribute="top" secondItem="wZj-Qk-7Sg" secondAttribute="bottom" constant="20" id="JOa-NY-Qud"/>
-                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="centerX" secondItem="7pq-1i-Fo9" secondAttribute="centerX" id="YjW-Ux-yxE"/>
-                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="leading" secondItem="NWR-Zb-CsN" secondAttribute="leading" constant="20" id="gOc-sP-duK"/>
-                            <constraint firstItem="31F-h9-CDR" firstAttribute="centerX" secondItem="7pq-1i-Fo9" secondAttribute="centerX" id="pmX-mO-XMz"/>
-                            <constraint firstItem="wZj-Qk-7Sg" firstAttribute="centerY" secondItem="7pq-1i-Fo9" secondAttribute="centerY" id="tZz-iQ-JYr"/>
+                            <constraint firstItem="Bk5-MF-DAT" firstAttribute="leading" secondItem="NWR-Zb-CsN" secondAttribute="leading" constant="20" id="5Ra-Z4-EYS"/>
+                            <constraint firstItem="Bk5-MF-DAT" firstAttribute="centerY" secondItem="7pq-1i-Fo9" secondAttribute="centerY" id="8zu-0k-0V1"/>
+                            <constraint firstItem="NWR-Zb-CsN" firstAttribute="trailing" secondItem="Bk5-MF-DAT" secondAttribute="trailing" constant="20" id="KlE-f5-N4c"/>
+                            <constraint firstItem="Bk5-MF-DAT" firstAttribute="centerX" secondItem="7pq-1i-Fo9" secondAttribute="centerX" id="LCd-Fm-ZA9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="EP7-tt-fha"/>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		558E01F62A5E8F53001B1AF4 /* Crypto in Frameworks */ = {isa = PBXBuildFile; productRef = 558E01F52A5E8F53001B1AF4 /* Crypto */; };
 		55B619462A5421AB0072A727 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619452A5421AB0072A727 /* AppDelegate.swift */; };
 		55B619482A5421AB0072A727 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619472A5421AB0072A727 /* SceneDelegate.swift */; };
 		55B6194A2A5421AB0072A727 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619492A5421AB0072A727 /* LoginViewController.swift */; };
@@ -14,7 +15,7 @@
 		55B6194F2A5421AD0072A727 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B6194E2A5421AD0072A727 /* Assets.xcassets */; };
 		55B619522A5421AD0072A727 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B619502A5421AD0072A727 /* LaunchScreen.storyboard */; };
 		55B6195A2A5421F60072A727 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619592A5421F60072A727 /* LoginView.swift */; };
-		55B619602A5422EF0072A727 /* LoginPageDefaultValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */; };
+		55B619602A5422EF0072A727 /* DefaultValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B6195F2A5422EF0072A727 /* DefaultValue.swift */; };
 		55B619632A5423920072A727 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55B619622A5423920072A727 /* SnapKit */; };
 		55B619662A5423B00072A727 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 55B619652A5423B00072A727 /* Then */; };
 		55B619682A5425060072A727 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619672A5425060072A727 /* Color + Extension.swift */; };
@@ -31,9 +32,12 @@
 		55B619812A5C01ED0072A727 /* JoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619802A5C01ED0072A727 /* JoinView.swift */; };
 		55B619832A5C02770072A727 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619822A5C02770072A727 /* JoinViewModel.swift */; };
 		55B619872A5C57B50072A727 /* UIViewController + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B619862A5C57B50072A727 /* UIViewController + Extension.swift */; };
+		55B6198A2A5D64940072A727 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 55B619892A5D64940072A727 /* GoogleSignIn */; };
+		55B6198D2A5E5CD60072A727 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55B6198C2A5E5CD60072A727 /* GoogleSignInSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		558E01F12A5E89EE001B1AF4 /* Login + RxSwift + MVVM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Login + RxSwift + MVVM.entitlements"; sourceTree = "<group>"; };
 		55B619422A5421AB0072A727 /* Login + RxSwift + MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Login + RxSwift + MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B619452A5421AB0072A727 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55B619472A5421AB0072A727 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +47,7 @@
 		55B619512A5421AD0072A727 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55B619532A5421AD0072A727 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55B619592A5421F60072A727 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageDefaultValues.swift; sourceTree = "<group>"; };
+		55B6195F2A5422EF0072A727 /* DefaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultValue.swift; sourceTree = "<group>"; };
 		55B619672A5425060072A727 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
 		55B619692A55582E0072A727 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		55B619702A555A070072A727 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
@@ -64,9 +68,12 @@
 			files = (
 				55B6196D2A5558480072A727 /* RxCocoa in Frameworks */,
 				55B6197D2A5BFE630072A727 /* FirebaseAuth in Frameworks */,
+				55B6198D2A5E5CD60072A727 /* GoogleSignInSwift in Frameworks */,
 				55B619632A5423920072A727 /* SnapKit in Frameworks */,
 				55B6196F2A5558480072A727 /* RxSwift in Frameworks */,
 				55B619662A5423B00072A727 /* Then in Frameworks */,
+				55B6198A2A5D64940072A727 /* GoogleSignIn in Frameworks */,
+				558E01F62A5E8F53001B1AF4 /* Crypto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +85,7 @@
 			children = (
 				55B619442A5421AB0072A727 /* Login + RxSwift + MVVM */,
 				55B619432A5421AB0072A727 /* Products */,
+				55B6198B2A5E5CD60072A727 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +100,7 @@
 		55B619442A5421AB0072A727 /* Login + RxSwift + MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				558E01F12A5E89EE001B1AF4 /* Login + RxSwift + MVVM.entitlements */,
 				55B619532A5421AD0072A727 /* Info.plist */,
 				55B619792A5BFDF20072A727 /* GoogleService-Info.plist */,
 				55B6195E2A5422D70072A727 /* Utils */,
@@ -138,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				55B619762A56CB0D0072A727 /* UserDefaults.swift */,
-				55B6195F2A5422EF0072A727 /* LoginPageDefaultValues.swift */,
+				55B6195F2A5422EF0072A727 /* DefaultValue.swift */,
 				55B619672A5425060072A727 /* Color + Extension.swift */,
 				55B619702A555A070072A727 /* String + Extension.swift */,
 				55B619722A56C2B10072A727 /* UIView + Extension.swift */,
@@ -154,6 +163,13 @@
 				55B619822A5C02770072A727 /* JoinViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		55B6198B2A5E5CD60072A727 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +194,9 @@
 				55B6196C2A5558480072A727 /* RxCocoa */,
 				55B6196E2A5558480072A727 /* RxSwift */,
 				55B6197C2A5BFE630072A727 /* FirebaseAuth */,
+				55B619892A5D64940072A727 /* GoogleSignIn */,
+				55B6198C2A5E5CD60072A727 /* GoogleSignInSwift */,
+				558E01F52A5E8F53001B1AF4 /* Crypto */,
 			);
 			productName = "Login + RxSwift + MVVM";
 			productReference = 55B619422A5421AB0072A727 /* Login + RxSwift + MVVM.app */;
@@ -212,6 +231,8 @@
 				55B619642A5423B00072A727 /* XCRemoteSwiftPackageReference "Then" */,
 				55B6196B2A5558480072A727 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				55B6197B2A5BFE630072A727 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				55B619882A5D64940072A727 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				558E01F42A5E8F53001B1AF4 /* XCRemoteSwiftPackageReference "swift-crypto" */,
 			);
 			productRefGroup = 55B619432A5421AB0072A727 /* Products */;
 			projectDirPath = "";
@@ -247,7 +268,7 @@
 				55B619462A5421AB0072A727 /* AppDelegate.swift in Sources */,
 				55B619712A555A070072A727 /* String + Extension.swift in Sources */,
 				55B619772A56CB0D0072A727 /* UserDefaults.swift in Sources */,
-				55B619602A5422EF0072A727 /* LoginPageDefaultValues.swift in Sources */,
+				55B619602A5422EF0072A727 /* DefaultValue.swift in Sources */,
 				55B6195A2A5421F60072A727 /* LoginView.swift in Sources */,
 				55B619752A56CA240072A727 /* FirstViewController.swift in Sources */,
 				55B619482A5421AB0072A727 /* SceneDelegate.swift in Sources */,
@@ -400,6 +421,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Login + RxSwift + MVVM/Login + RxSwift + MVVM.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
@@ -428,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Login + RxSwift + MVVM/Login + RxSwift + MVVM.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = VJ2VF4KUF7;
@@ -475,6 +498,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		558E01F42A5E8F53001B1AF4 /* XCRemoteSwiftPackageReference "swift-crypto" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-crypto.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		55B619612A5423920072A727 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -507,9 +538,22 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		55B619882A5D64940072A727 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		558E01F52A5E8F53001B1AF4 /* Crypto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 558E01F42A5E8F53001B1AF4 /* XCRemoteSwiftPackageReference "swift-crypto" */;
+			productName = Crypto;
+		};
 		55B619622A5423920072A727 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 55B619612A5423920072A727 /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -534,6 +578,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 55B6197B2A5BFE630072A727 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		55B619892A5D64940072A727 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B619882A5D64940072A727 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		55B6198C2A5E5CD60072A727 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 55B619882A5D64940072A727 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

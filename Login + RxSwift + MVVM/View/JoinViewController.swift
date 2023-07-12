@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import FirebaseAuth
 
-class JoinViewController: UIViewController {
+final class JoinViewController: UIViewController {
     
     private var joinView = JoinView()
     private let viewModel = JoinViewModel()
@@ -114,7 +114,6 @@ class JoinViewController: UIViewController {
         
         viewModel.joinSuccess
             .subscribe(onNext: {
-                IsLogin.launchedBefore = true
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)

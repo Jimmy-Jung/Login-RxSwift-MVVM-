@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import GoogleSignIn
 
 final class LoginView: UIView {
     private let textViewHeight: CGFloat = DV.TextSize.loginTextViewHeight
@@ -83,7 +84,7 @@ final class LoginView: UIView {
         $0.backgroundColor = .kakaoLightBrown
         $0.layer.cornerRadius = 5
         $0.setTitle(DV.LabelText.loginButton, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         $0.setTitleColor(.white, for: .normal)
         $0.setTitleColor(.kakaoTextBrown, for: .disabled)
         $0.isEnabled = false
@@ -93,14 +94,34 @@ final class LoginView: UIView {
         $0.backgroundColor = .kakaoBrown
         $0.layer.cornerRadius = 5
         $0.setTitle(DV.LabelText.joinButton, for: .normal)
-        $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         $0.setTitleColor(.white, for: .normal)
         $0.setTitleColor(.kakaoTextBrown, for: .disabled)
         $0.isEnabled = true
     }
     
+    lazy var googleButton = UIButton().then {
+        $0.setImage(UIImage(named: DV.ImageName.googleLogo), for: .normal)
+        $0.backgroundColor = .systemBackground
+        $0.layer.cornerRadius = 5
+        $0.setTitle(DV.LabelText.googleButton, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        $0.setTitleColor(UIColor.label, for: .normal)
+        $0.isEnabled = true
+    }
+    
+    lazy var appleButton = UIButton().then {
+        $0.setImage(UIImage(named: DV.ImageName.appleLogo), for: .normal)
+        $0.backgroundColor = .black
+        $0.layer.cornerRadius = 5
+        $0.setTitle(DV.LabelText.appleButton, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        $0.setTitleColor(.white, for: .normal)
+        $0.isEnabled = true
+    }
+    
     lazy var stackView = UIStackView().then {
-        $0.spacing = 18
+        $0.spacing = DV.TextSize.stackViewSpace
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.alignment = .fill
@@ -108,6 +129,8 @@ final class LoginView: UIView {
         $0.addArrangedSubview(passwordTextFieldView)
         $0.addArrangedSubview(loginButton)
         $0.addArrangedSubview(joinButton)
+        $0.addArrangedSubview(googleButton)
+        $0.addArrangedSubview(appleButton)
     }
     
     lazy var passwordResetButton = UIButton().then {
@@ -153,6 +176,7 @@ final class LoginView: UIView {
     // MARK: - 오토레이아웃 설정
     
     private func setupAutoLayout() {
+        
         logoImageView.snp.makeConstraints {
             $0.width.equalTo(textViewHeight * 4)
             $0.centerX.equalToSuperview()
@@ -196,7 +220,7 @@ final class LoginView: UIView {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(30)
             $0.trailing.equalToSuperview().offset(-30)
-            $0.height.equalTo(textViewHeight * stackViewCount + space * (stackViewCount - 1))
+            $0.height.equalTo((textViewHeight * stackViewCount) + (space * (stackViewCount - 1)))
         }
         
         passwordResetButton.snp.makeConstraints {

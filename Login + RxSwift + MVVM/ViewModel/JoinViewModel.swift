@@ -62,8 +62,9 @@ final class JoinViewModel {
                 switch code {
                 case 17007: //이미 가입한 계정일때
                     //로그인 하기
-                    Auth.auth().signIn(withEmail: email, password: password)
-                    self?.joinSuccess.accept(())
+                    Auth.auth().signIn(withEmail: email, password: password) {_,_ in 
+                        self?.joinSuccess.accept(())
+                    }
                 default:
                     self?.emailErrorMessage.accept(error.localizedDescription)
                 }
