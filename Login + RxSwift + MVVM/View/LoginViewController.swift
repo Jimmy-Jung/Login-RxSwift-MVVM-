@@ -210,8 +210,7 @@ final class LoginViewController: UIViewController {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
             
             // ...
-            Auth.auth().signIn(with: credential) { user,_ in
-                print(user?.user.displayName)
+            Auth.auth().signIn(with: credential) { _,_ in
                 self.dismiss(animated: true)
             }
         }
@@ -358,7 +357,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizatio
         }
         // User is signed in to Firebase with Apple.
         // ...
-          print(authResult?.user.displayName)
           
           self.dismiss(animated: true)
       }
