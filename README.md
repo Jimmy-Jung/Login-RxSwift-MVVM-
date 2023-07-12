@@ -56,7 +56,7 @@ emailInfoLabel.snp.makeConstraints {
 3. email과 password가 맞으면 다음 화면으로 넘어간다.
 4. 로그인 여부는 Auth.auth().currentUser?를 통해 확인한다.
 
-<img width="350" alt="image" src="https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917">
+<img width="350" alt="image" src="https://github.com/Jimmy-Jung/Login_RxSwift_MVVM_Study/assets/115251866/b6175655-f155-4bc1-9379-9081a807024a">
 <img width="350" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/5cff6347-9c38-4054-aa1c-c1621457464d">
 
 ## 로직
@@ -187,7 +187,8 @@ enum keyEnum: String {
 - Firebase를 활용해 구글 계정 연동
   
 <img width="759" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/2b490d98-b2b8-409d-87a5-7d721998ff57">
-<img width="953" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/fc7687d1-6c2c-4507-a5ba-33ed4058cf0d">
+<img width="838" alt="image" src="https://github.com/Jimmy-Jung/Login_RxSwift_MVVM_Study/assets/115251866/64d1188a-d0b5-4f9b-963d-821770c1b331">
+
 
 - 로그인 성공시 LoginViewController를 dismiss한다.
   
