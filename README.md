@@ -54,10 +54,10 @@ emailInfoLabel.snp.makeConstraints {
 1. TextLabel을 선택하면 PlaceHolderLabel이 애니메이션 효과와 함께 작아진다.
 2. email과 password 양식 검사를 통해 PlaceHolderLabel에 표시해준다.
 3. email과 password가 맞으면 다음 화면으로 넘어간다.
-4. 로그인 여부는 userDefault에 저장해서 확인한다.
+4. 로그인 여부는 Auth.auth().currentUser?를 통해 확인한다.
 
-<img width="350" alt="image" src="[https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917](https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/e449e721-20b7-48bf-8342-0c0809de9f6f)">
-<img width="350" alt="image" src="[https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917](https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/172f4b74-f1c7-4146-8d70-0d79aa0ce95f)">
+<img width="350" alt="image" src="https://github.com/Jimmy-Jung/RxSwift-MVVM-/assets/115251866/eec171ba-6bf1-4ef6-82db-621f60221917">
+<img width="350" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/5cff6347-9c38-4054-aa1c-c1621457464d">
 
 ## 로직
 
@@ -137,6 +137,7 @@ email
 ```
 
 ### UserDefault + PropertyWrapper
+- 소셜로그인을 플러그인 하기 전에 사용했던 로그인 상태 확인 방법으로 사용
 
 - 프로퍼티래퍼로 UserDefault 구조체를 감싸서 사용하기 쉽게 만들어준다.
 
@@ -179,4 +180,168 @@ struct IsLogin {
 enum keyEnum: String {
     case isLogin = "isLogin"
 }
+```
+
+### Google Login
+
+- Firebase를 활용해 구글 계정 연동
+  
+<img width="759" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/2b490d98-b2b8-409d-87a5-7d721998ff57">
+<img width="953" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/fc7687d1-6c2c-4507-a5ba-33ed4058cf0d">
+
+- 로그인 성공시 LoginViewController를 dismiss한다.
+  
+```swift
+loginView.googleButton.rx.tap
+            .subscribe(onNext:  { [weak self] in
+                self?.handleGoogleLogin()
+            })
+            .disposed(by: disposeBag)
+
+private func handleGoogleLogin() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        // Create Google Sign In configuration object.
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
+        
+        // Start the sign in flow!
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { [unowned self] result, error in
+            guard error == nil else {
+                // ...
+                return
+            }
+            
+            guard let user = result?.user,
+                  let idToken = user.idToken?.tokenString
+            else {
+                // ...
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+            
+            // ...
+            Auth.auth().signIn(with: credential) { _,_ in
+                self.dismiss(animated: true)
+            }
+        }
+    }
+```
+
+### Apple Login
+- 애플 Certificates를 활용해 로그인
+- Apple Developer에 접속해 Services IDs애 둥록해준다.
+
+  <img width="1083" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/eb22bac2-d546-407c-8487-0f21a1f2e141">
+
+- Xcode의 Project에서 +Capability를 클릭해 sign in with Apple을 추가해준다
+
+  <img width="749" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/35e59150-bb68-4cd7-a1bf-c15c412fcb13">
+  <img width="633" alt="image" src="https://github.com/Jimmy-Jung/Login-RxSwift-MVVM-/assets/115251866/9e16bcb6-ed5f-4a41-869d-c07656a799e5">
+
+- 아래 코드를 추가해주면 완성
+  
+```swift
+
+import AuthenticationServices
+import Crypto
+
+// Unhashed nonce.
+fileprivate var currentNonce: String?
+
+@available(iOS 13.0, *)
+extension LoginViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+    
+    private func sha256(_ input: String) -> String {
+      let inputData = Data(input.utf8)
+      let hashedData = SHA256.hash(data: inputData)
+      let hashString = hashedData.compactMap {
+        String(format: "%02x", $0)
+      }.joined()
+
+      return hashString
+    }
+
+    func startSignInWithAppleFlow() {
+      let nonce = randomNonceString()
+      currentNonce = nonce
+      let appleIDProvider = ASAuthorizationAppleIDProvider()
+      let request = appleIDProvider.createRequest()
+      request.requestedScopes = [.fullName, .email]
+      request.nonce = sha256(nonce)
+
+      let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+      authorizationController.delegate = self
+      authorizationController.presentationContextProvider = self
+      authorizationController.performRequests()
+    }
+    
+    private func randomNonceString(length: Int = 32) -> String {
+      precondition(length > 0)
+      var randomBytes = [UInt8](repeating: 0, count: length)
+      let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
+      if errorCode != errSecSuccess {
+        fatalError(
+          "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+        )
+      }
+
+      let charset: [Character] =
+        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+
+      let nonce = randomBytes.map { byte in
+        // Pick a random character from the set, wrapping around if needed.
+        charset[Int(byte) % charset.count]
+      }
+
+      return String(nonce)
+    }
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      guard let nonce = currentNonce else {
+        fatalError("Invalid state: A login callback was received, but no login request was sent.")
+      }
+      guard let appleIDToken = appleIDCredential.identityToken else {
+        print("Unable to fetch identity token")
+        return
+      }
+      guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+        print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+        return
+      }
+      // Initialize a Firebase credential, including the user's full name.
+      let credential = OAuthProvider.appleCredential(withIDToken: idTokenString,
+                                                        rawNonce: nonce,
+                                                        fullName: appleIDCredential.fullName)
+      // Sign in with Firebase.
+      Auth.auth().signIn(with: credential) { (authResult, error) in
+        if let error = error {
+          // Error. If error.code == .MissingOrInvalidNonce, make sure
+          // you're sending the SHA256-hashed nonce as a hex string with
+          // your request to Apple.
+          print(error.localizedDescription)
+          return
+        }
+        // User is signed in to Firebase with Apple.
+        // ...
+          
+          self.dismiss(animated: true)
+      }
+    }
+  }
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    // Handle error.
+    print("Sign in with Apple errored: \(error)")
+  }
+
+}
+
+
 ```
